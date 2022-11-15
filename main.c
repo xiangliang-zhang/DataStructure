@@ -1,23 +1,22 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stdio.h"
+
+// 额外的库需要下载，并复制到include文件夹内
 #include <uthash.h>
 
-
-
-
-struct hashTable {
+typedef struct hashTable {
     int key;
     UT_hash_handle hh;
-};
+} hash_table;
 
-bool containsDuplicate(int* nums, int numsSize) {
-    struct hashTable* set = NULL;
+bool containsDuplicate(int *nums, int numsSize) {
+    hash_table *set = NULL;
     for (int i = 0; i < numsSize; i++) {
-        struct hashTable* tmp;
-        HASH_FIND_INT(set, nums + i, tmp);
+        hash_table *tmp;
+        HASH_FIND_INT(set, nums + i, tmp); // 参数1为要寻找的哈希表， 参数2为变量的地址, 参数3为寻找到的变量的地址
         if (tmp == NULL) {
-            tmp = malloc(sizeof(struct hashTable));
+            tmp = malloc(sizeof(hash_table));
             tmp->key = nums[i];
             HASH_ADD_INT(set, key, tmp);
         } else {
@@ -29,7 +28,7 @@ bool containsDuplicate(int* nums, int numsSize) {
 
 
 int main() {
-    int nums[] = {1, 1, 1, 3, 3, 4, 3, 2, 4, 2};
+    int nums[] = {1, 1, 2, 3, 4, 5};
     int numsSize = sizeof(nums) / sizeof(nums[0]);
     int res = containsDuplicate(&nums, numsSize);
     printf("%d", res);
