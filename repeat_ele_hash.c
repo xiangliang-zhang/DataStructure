@@ -6,7 +6,7 @@
 
 typedef struct hashTable {
     int key;
-    UT_hash_handle hh; //用户自定义数据必须包含的结构
+    UT_hash_handle hh; // 用户自定义数据必须包含的结构
 } hash_table;
 
 bool containsDuplicate(int *nums, int numsSize) {
