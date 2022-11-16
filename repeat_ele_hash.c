@@ -1,8 +1,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stdio.h"
-// 额外的库需要下载，并复制到include文件夹内
-#include "uthash.h"
+#include "uthash.h" // 额外的库需要下载，并复制到include文件夹内
 
 typedef struct hashTable {
     int key;
