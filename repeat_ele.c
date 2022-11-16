@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "stdio.h"
 
-// ¶îÍâµÄ¿âĞèÒªÏÂÔØ£¬²¢¸´ÖÆµ½includeÎÄ¼ş¼ĞÄÚ
+// é¢å¤–çš„åº“éœ€è¦ä¸‹è½½ï¼Œå¹¶å¤åˆ¶åˆ°includeæ–‡ä»¶å¤¹å†…
 #include <uthash.h>
 
 typedef struct hashTable {
@@ -14,7 +14,7 @@ bool containsDuplicate(int *nums, int numsSize) {
     hash_table *set = NULL;
     for (int i = 0; i < numsSize; i++) {
         hash_table *tmp;
-        HASH_FIND_INT(set, nums + i, tmp); // ²ÎÊı1ÎªÒªÑ°ÕÒµÄ¹şÏ£±í£¬ ²ÎÊı2Îª±äÁ¿µÄµØÖ·, ²ÎÊı3ÎªÑ°ÕÒµ½µÄ±äÁ¿µÄµØÖ·
+        HASH_FIND_INT(set, nums + i, tmp); // å‚æ•°1ä¸ºè¦å¯»æ‰¾çš„å“ˆå¸Œè¡¨ï¼Œ å‚æ•°2ä¸ºå˜é‡çš„åœ°å€, å‚æ•°3ä¸ºå¯»æ‰¾åˆ°çš„å˜é‡çš„åœ°å€
         if (tmp == NULL) {
             tmp = malloc(sizeof(hash_table));
             tmp->key = nums[i];
