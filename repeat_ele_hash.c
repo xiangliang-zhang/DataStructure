@@ -20,7 +20,7 @@ bool containsDuplicate(int *nums, int numsSize) {
 }
 
 int main() {
-    int nums[] = {1, 3, 2, 6, 7, 8, 9, 10};
+    int nums[] = {1, 3, 2, 6, 7, 8, 9, 10, 5};
     int numsSize = sizeof(nums) / sizeof(nums[0]);
     int res = containsDuplicate(nums, numsSize);
     printf("%d", res);
