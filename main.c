@@ -8,8 +8,8 @@ int cmp(const void* _a, const void* _b) {
     return a - b;
 }
 
-// qsort存在于stdlib.h库
-bool containsDuplicate(char *nums, int numsSize) {
+// qsort存在于stdlib.h库, 参数分别为要排序的数组、数组的大小、数组元素的大小、比较方法
+bool containsDuplicate(int *nums, int numsSize) {
     qsort(nums, numsSize, sizeof(int), cmp);
     for (int i = 0; i < numsSize - 1; i++) {
         if (nums[i] == nums[i + 1]) {
@@ -20,7 +20,7 @@ bool containsDuplicate(char *nums, int numsSize) {
 }
 
 int main(){
-    char nums[] = {'a', 'b', 'c', 'd', 'a'};
+    int nums[] = {1, 3, 2, 6, 7};
     int numsSize = sizeof(nums) / sizeof(nums[0]);
     int res = containsDuplicate(nums, numsSize);
     printf("%d", res);
