@@ -1,6 +1,5 @@
 from typing import List  # 类型检查
 
-
 class Solution(object):
     def matrixReshape(self, mat, r, c):
         """
