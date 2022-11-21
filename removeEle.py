@@ -1,7 +1,7 @@
 # Definition for singly-linked list.
 from typing import Optional
 
-
+# 去除单链表中的指定元素，两个指针
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
