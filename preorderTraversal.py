@@ -42,14 +42,52 @@ class Solution:
 
         return res
 
+    # 莫里斯变换，感觉没必要
+    def preorder_morrios(self, root, res):
+        if not root:
+            return res
+
+        p1 = root
+        while p1:
+            p2 = p1.left  #
+            if p2:
+                while p2.right and p2.right != p1:  # 无右子树
+                    p2 = p2.right
+                if not p2.right:
+                    res.append(p1.val)
+                    p2.right = p1
+                    p1 = p1.left
+                    continue
+                else:
+                    p2.right = None
+            else:
+                res.append(p1.val)
+            p1 = p1.right
+
+        return res
 
 t1 = TreeNode(1)
 t2 = TreeNode(2)
 t3 = TreeNode(3)
+t4 = TreeNode(4)
+t5 = TreeNode(5)
+t6 = TreeNode(6)
+t7 = TreeNode(7)
 
-t1.right = t2
-t2.left = t3
+
+t1.left = t2
+t1.right = t3
+
+t2.left = t4
+t2.right = t5
+
+t3.left = t6
+t3.right = t7
 
 s = Solution()
 # s.preorderTraversal_recursion(t1)
-s.preorderTraversal_iteration(t1)
+# s.preorderTraversal_iteration(t1)
+
+res = []
+s.preorder_morrios(t1, res)
+print(res)
