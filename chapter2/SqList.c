@@ -12,7 +12,6 @@ typedef struct {
 } SqList;
 
 // 数组的动态分配
-#define InitSize 100
 typedef struct {
     int *data;
     int MaxSize2, length;
