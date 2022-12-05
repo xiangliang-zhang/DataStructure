@@ -5,10 +5,13 @@
 // 查找元素，若存在与后一元素交换，否则插入该元素
 #define MaxSize 100
 
+
 typedef struct {
     int data[MaxSize];
     int length;
 } SqList;
+
+bool biSearch(SqList *s, int val);
 
 bool InitSqList(SqList *s) {
     s->data[0] = 1;
@@ -18,7 +21,7 @@ bool InitSqList(SqList *s) {
     s->data[4] = 96;
     s->data[5] = 97;
     s->data[6] = 98;
-    s->data[7] = 99;
+    s->data[7] = 100;
     s->length = 8;
     return true;
 }
@@ -59,11 +62,35 @@ int main() {
     SqList s;
     s.length = 0;
     InitSqList(&s);
-    int val = 95;
-    FindOrInsert(&s, val);
+    int val = 99;
+//    FindOrInsert(&s, val);
+    biSearch(&s, val);
     printEle(s);
     return 0;
 }
 
 // 最优解应为折半查找
-
+bool biSearch(SqList *s, int val) {
+    int i = 0, j = s->length;
+    while (i <= j) {
+        int mid = (i + j) / 2;
+        if (s->data[mid] == val) {
+            int temp = s->data[mid];
+            s->data[mid] = s->data[mid + 1];
+            s->data[mid + 1] = temp;
+            break;
+        } else if (s->data[mid] < val) {
+            i = mid + 1;
+        } else {
+            j = mid - 1;
+        }
+    }
+    if (i > j) {
+        for (int t = s->length; t > i; t--) {
+            s->data[t] = s->data[t - 1];
+        }
+        s->data[i] = val;
+        s->length++;
+    }
+    return true;
+}
