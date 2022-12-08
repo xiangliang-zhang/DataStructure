@@ -2,6 +2,7 @@ import collections
 from collections import defaultdict
 
 # 获取第一次出现的字符串，哈希
+
 class Solution:
     def firstUniqChar(self, s: str) -> int:
         cnt_dict = defaultdict(int)
