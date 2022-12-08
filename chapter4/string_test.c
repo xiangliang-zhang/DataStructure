@@ -3,7 +3,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-// 定长串
+// 定长串、堆串、赋值、初始化等
 #define MaxSize 50
 typedef struct {
     char ch[MaxSize];
