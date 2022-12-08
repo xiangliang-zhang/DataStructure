@@ -1,6 +1,7 @@
 from typing import List
 
 # 判断是否为有效的数独， 行/列/九宫格
+
 # 暴力
 class Solution:
 
