@@ -22,6 +22,7 @@ void InsertHead(LinkList *L, const int nums[], int length) {
         t->next = l;
         t = l;
     }
+    t->next = L;
 }
 
 int Partition(int num[], int left, int right) {
@@ -94,12 +95,38 @@ void SortCleanNode(LinkList *L) {
     free(L);
 }
 
+// 循环单链表依次删除最小的元素，并释放结点
+void DelMinEle(LinkList *L) {
+    LinkList *t = L;
+    LinkList *pT = L;
+    while (L != NULL) {
+        int min_val = L->next->data;
+        while (t->next != L) {
+            if (t->next->data <= min_val) {
+                pT = t;
+                min_val = t->next->data;
+            }
+            t = t->next;
+        }
+        t = pT->next;
+        pT->next = t->next;
+        free(t);
+        t = L;
+        if (t->next == L) {
+            break;
+        }
+    }
+    free(L);
+}
+
+
 int main() {
     int num[] = {6, 9, 5, 4, 8, 1};
     int length = 6;
     LinkList *L = (LinkList *) malloc(sizeof(LNode));
     InitLinkList(L);
     InsertHead(L, num, length);
-    SortCleanNode(L);
+//    SortCleanNode(L);
+    DelMinEle(L);
     return 0;
 }
