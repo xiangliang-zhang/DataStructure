@@ -1,6 +1,7 @@
 from typing import List
 
 # 杨辉三角，动态规划
+
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         res = []
