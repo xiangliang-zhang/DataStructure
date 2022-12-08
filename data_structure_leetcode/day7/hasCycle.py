@@ -1,6 +1,8 @@
 # Definition for singly-linked list.
 from typing import Optional
 
+# 判断是否是环形链表
+
 # 快慢指针，慢走1，快走2
 class ListNode:
     def __init__(self, x):
