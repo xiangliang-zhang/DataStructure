@@ -2,12 +2,12 @@
 #include "stdlib.h"
 #include "stdbool.h"
 
+// 链栈的初始化，带头节点
 typedef struct LinkNode {
     int data;
     struct LinkNode *next;
 } LNode, *LiStack;
 
-// 链栈的初始化，带头节点
 LiStack Initial() {
     LiStack l = (LNode *) malloc(sizeof(LNode));
     l->next = NULL;
