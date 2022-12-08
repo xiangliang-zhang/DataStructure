@@ -1,5 +1,7 @@
 from typing import List  # 类型检查
 
+# 重塑矩阵
+
 # 矩阵变形 [2, 4] -> [4, 2]
 class Solution(object):
     def matrixReshape(self, mat, r, c):
