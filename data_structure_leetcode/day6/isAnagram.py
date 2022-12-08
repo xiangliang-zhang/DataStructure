@@ -1,6 +1,7 @@
 import collections
 
 # 判断两个字符串是否为异位
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         s_dict = collections.defaultdict(int)
