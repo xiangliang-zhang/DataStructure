@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "uthash.h"
 
+// 两数之和
+
 // 暴力求解,时间复杂度O(N²)
 int *twoSum_violence(int *nums, int numsSize, int target, int *returnSize) {
     int *res = (int *) malloc(sizeof(int) * 2);
