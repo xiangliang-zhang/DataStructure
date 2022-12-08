@@ -1,5 +1,7 @@
 import collections
 
+# 判断前一字符能否由后一字符组成
+
 # 哈希， 只统计后字符串的出现次数即可，遍历前字符串在后字符串判断
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
