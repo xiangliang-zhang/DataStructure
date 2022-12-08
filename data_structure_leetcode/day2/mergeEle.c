@@ -3,6 +3,7 @@
 #include "stdlib.h"
 
 // 合并有序数组，三指针尾插
+
 // 三指针尾插法，优点：省空间
 void merge(int *nums1, int nums1Size, int m, int *nums2, int nums2Size, int n) {
 
