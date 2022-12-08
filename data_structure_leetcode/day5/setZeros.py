@@ -1,5 +1,7 @@
 from typing import List
 
+# 矩阵置0
+
 # 将正方形中0所在的行列均设置为0
 # 暴力
 class Solution:
