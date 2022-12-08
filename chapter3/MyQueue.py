@@ -1,3 +1,4 @@
+
 # 用队列实现栈
 class MyQueue:
 
