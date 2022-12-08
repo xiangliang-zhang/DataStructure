@@ -3,6 +3,7 @@ from typing import Optional, List
 
 
 # 先序遍历二叉树，递归
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
