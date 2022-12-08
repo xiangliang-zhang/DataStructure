@@ -14,11 +14,14 @@ void SetListVal(LinkList *pNode);
 
 void ReversePrintVal(LinkList *node);
 
+void RecursionReversePrint(LinkList *L);
+
 int main() {
     LinkList *L = (LinkList *) malloc(sizeof(LNode));
     InitLinkList(L);
     SetListVal(L);
-    ReversePrintVal(L);
+//    ReversePrintVal(L);
+    RecursionReversePrint(L->next);
     return 0;
 }
 
@@ -34,6 +37,15 @@ void ReversePrintVal(LinkList *node) {
     for (int i = length - 1; i >= 0; i--) {
         printf("%d\n", res[i]);
     }
+}
+
+void RecursionReversePrint(LinkList *L) {
+    if (L->next != NULL) {
+        RecursionReversePrint(L->next);
+    }
+    if (L != NULL)
+        printf("%d\n", L->data);
+
 }
 
 void SetListVal(LinkList *pNode) {
