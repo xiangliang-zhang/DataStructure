@@ -1,5 +1,5 @@
 
-# 用队列实现栈
+# 用栈实现队列
 class MyQueue:
 
     def __init__(self):
