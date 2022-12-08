@@ -2,6 +2,7 @@
 #include "stdio.h"
 
 // 最大子数组和，动态规划
+
 // 动态规划
 int maxSubArray_dp(int *nums, int numsSize) {
     int pre = 0, maxAns = nums[0];
@@ -13,10 +14,10 @@ int maxSubArray_dp(int *nums, int numsSize) {
 }
 
 
-//int main() {
-//    int nums[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-//    int numsSize = sizeof(nums) / sizeof(int);
-//    int res = maxSubArray_dp(nums, numsSize);
-//    printf("%d", res);
-//    return 0;
-//}
+int main() {
+    int nums[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int numsSize = sizeof(nums) / sizeof(int);
+    int res = maxSubArray_dp(nums, numsSize);
+    printf("%d", res);
+    return 0;
+}
