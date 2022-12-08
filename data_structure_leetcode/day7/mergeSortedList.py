@@ -1,6 +1,8 @@
 # Definition for singly-linked list.
 from typing import Optional
 
+# 合并两个有序数组
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
