@@ -7,8 +7,8 @@
 
 typedef struct BiTNode {
     int data;
-    struct ThreadNode *left;
-    struct ThreadNode *right;
+    struct BiTNode *left;
+    struct BiTNode *right;
 } BiTNode, *BiTree;
 
 void InitBiTNode(BiTree T) {
@@ -94,14 +94,34 @@ void PreOrderNonRecursion(BiTree T) {
     BiTNode *temp = T;
     Stack *s = (Stack *) malloc(sizeof(Stack));
     InitStack(s);
-    while (temp != NULL || !EmptyStack(s)) {
-        if (temp) {
+    while (temp != NULL) {
+        while (temp != NULL) {
             printf("%d\n", temp->data);
             Push(s, temp);
             temp = temp->left;
+        }
+        temp = Pop(s);
+        if (temp->right == NULL) {
+            while (temp->right == NULL && !EmptyStack(s)) {
+                temp = Pop(s);
+            }
+        }
+        temp = temp->right;
+    }
+}
+
+void PreOrderOfficial(BiTree T) {
+    BiTNode *t = T;
+    Stack *s = (Stack *) malloc(sizeof(Stack));
+    InitStack(s);
+    while (t || !EmptyStack(s)) {
+        if (t) {
+            printf("%d\n", t->data);
+            Push(s, t);
+            t = t->left;
         } else {
-            temp = Pop(s);
-            temp = temp->right;
+            t = Pop(s);
+            t = t->right;
         }
     }
 }
@@ -110,7 +130,10 @@ int main() {
     BiTree T = (BiTree) malloc(sizeof(BiTree));
     InitBiTNode(T);
     SetValue(T);
-//    PreOrder(T);
+    PreOrder(T);
+    printf("----------\n");
     PreOrderNonRecursion(T);
+    printf("----------\n");
+    PreOrderOfficial(T);
     return 0;
 }
