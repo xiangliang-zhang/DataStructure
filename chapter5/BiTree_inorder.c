@@ -103,6 +103,22 @@ void InOrderNoRecursion(BiTree T) {
     }
 }
 
+void InOrderOfficial(BiTree T) {
+    BiTNode *t = T;
+    Stack *s = (Stack *) malloc(sizeof(Stack));
+    InitStack(s);
+    while (t || !EmptyStack(s)) {
+        if (t) {
+            Push(s, t);
+            t = t->left;
+        } else {
+            t = Pop(s);
+            printf("%d\n", t->data);
+            t = t->right;
+        }
+    }
+}
+
 int main() {
     BiTree T = (BiTree) malloc(sizeof(BiTree));
     InitBiTree(T);
@@ -110,4 +126,6 @@ int main() {
     InOrder(T);
     printf("\n-----------\n");
     InOrderNoRecursion(T);
+    printf("\n-----------\n");
+    InOrderOfficial(T);
 }
