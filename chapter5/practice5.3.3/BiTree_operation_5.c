@@ -42,70 +42,89 @@ void SetValue(BiTree T) {
     InitBiTNode(t6);
     t6->data = 6;
 
+    BiTNode *t7 = (BiTNode *) malloc(sizeof(BiTNode));
+    InitBiTNode(t7);
+    t7->data = 7;
+
     T->left = t1;
     t1->left = t2;
-    t2->left = t3;
-    t3->right = t4;
-    t4->right = t5;
-    t5->right = t6;
+    t1->right = t3;
+    T->right = t4;
+    t4->left = t5;
+    t4->right = t6;
+//    t6->right = t7;
 }
 
 #define MaxSize 100
 
-typedef struct Stack {
+typedef struct Queue {
     BiTNode *data[MaxSize];
-    int head;
-} Stack;
+    int head, tail;
+} Queue;
 
-void InitStack(Stack *s) {
-    s->head = -1;
+void InitQueue(Queue *q) {
+    q->head = 0;
+    q->tail = -1;
 }
 
-void Push(Stack *s, BiTNode *node) {
-    if (s->head < MaxSize - 1) {
-        s->head++;
-        s->data[s->head] = node;
-    }
-}
-
-BiTNode *Pop(Stack *s) {
-    if (s->head > -1) {
-        BiTNode *t = s->data[s->head];
-        s->head--;
-        return t;
-    }
-}
-
-bool EmptyStack(Stack *s) {
-    if (s->head == -1) {
+bool EmptyQueue(Queue *q) {
+    if (q->head > q->tail) {
         return true;
     } else {
         return false;
     }
 }
 
+void EnQueue(Queue *q, BiTNode *node) {
+    if (q->tail < MaxSize - 1) {
+        q->tail++;
+        q->data[q->tail] = node;
+    }
+}
+
+BiTNode *DeQueue(Queue *q) {
+    if (!EmptyQueue(q)) {
+        BiTNode *t = q->data[q->head];
+        q->head++;
+        return t;
+    }
+}
+
+
 int GetHeight(BiTree T) {
-    Stack *s = (Stack *) malloc(sizeof(Stack));
-    InitStack(s);
+    Queue *q1 = (Queue *) malloc(sizeof(Queue));
+    Queue *q2 = (Queue *) malloc(sizeof(Queue));
+    InitQueue(q1);
+    InitQueue(q2);
+
     int max_high = 0;
-    int now_high = 0;
-    BiTNode *t = T;
-    while (t || !EmptyStack(s)) {
-        if (t) {
-            Push(s, t);
-            now_high++;
-            t = t->left;
-            if (now_high > max_high) {
-                max_high = now_high;
+    BiTNode *pointer = T;
+    EnQueue(q1, pointer);
+
+    while (!EmptyQueue(q1) || !EmptyQueue(q2)) {
+        if (!EmptyQueue(q1)) max_high++;
+        while (!EmptyQueue(q1)) {
+            pointer = DeQueue(q1);
+            if (pointer->left) {
+                EnQueue(q2, pointer->left);
             }
-        } else {
-            t = Pop(s);
-            t = t->right;
-            if (t == NULL) {
-                now_high--;
+            if (pointer->right) {
+                EnQueue(q2, pointer->right);
+            }
+        }
+
+        if (!EmptyQueue(q2)) max_high++;
+        while (!EmptyQueue(q2)) {
+            pointer = DeQueue(q2);
+            if (pointer->left) {
+                EnQueue(q1, pointer->left);
+            }
+            if (pointer->right) {
+                EnQueue(q1, pointer->right);
             }
         }
     }
+
     return max_high;
 }
 
