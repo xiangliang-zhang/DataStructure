@@ -24,34 +24,32 @@ void InsertHead(LinkList *L, const int num[], int length) {
 }
 
 void FindIntersectNode(LinkList *L1, LinkList *L2) {
-    LinkList *pT1 = L1;
-    LinkList *t1 = L1->next;
-    LinkList *t2 = L2->next;
-    while (t2->next != NULL) {
-        t2 = t2->next;
-    }
-    t2->next = t1;
-    L1->next = NULL;
+    LinkList *pT;
+    LinkList *t1 = L1;
+    LinkList *t2 = L2;
 
-    t2 = L2->next;
-    while (t1 != NULL && t2 != t1) {
-        while (t1->data < t2->data) {
+    while (t1->next && t2->next) {
+        if (t1->next->data < t2->next->data) {
+            pT = t1->next;
+            t1->next = pT->next;
+            free(pT);
+        } else if (t1->next->data > t2->next->data) {
+            pT = t2->next;
+            t2->next = t2->next->next;
+            free(pT);
+        } else if (t1->next->data == t2->next->data) {
             t1 = t1->next;
+            pT = t2->next;
+            t2->next = t2->next->next;
+            free(pT);
         }
-        while (t1->data > t2->data) {
-            t2 = t2->next;
-        }
-        if (t1->data == t2->data) {
-            LNode *pTemp = (LNode *) malloc(sizeof(LNode));
-            pTemp->data = t1->data;
-            pTemp->next = NULL;
-            pT1->next = pTemp;
-            pT1 = pTemp;
-            t1 = t1->next;
-            t2 = t2->next;
-        }
-
     }
+    while (t2->next) {
+        pT = t2->next;
+        t2->next = t2->next->next;
+        free(pT);
+    }
+    free(L2);
 }
 
 void PrintVal(LinkList *L) {
