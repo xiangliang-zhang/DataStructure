@@ -102,6 +102,15 @@ ThreadNode *GetNextNode(ThreadTree T, ThreadNode *node) {
     return temp;
 }
 
+ThreadNode *GetParent(ThreadTree T, ThreadNode *node) {
+    if ((T->ltag == 0 && T->left == node) || (T->rtag == 0 && T->right == node)) {
+        return T;
+    } else {
+        if (T->ltag == 0) GetParent(T->left, node);
+        if (T->rtag == 0) GetParent(T->right, node);
+    }
+}
+
 ThreadNode *GetPreNode(ThreadTree T, ThreadNode *node) {
     if (T == node) {
         return NULL;
@@ -110,13 +119,21 @@ ThreadNode *GetPreNode(ThreadTree T, ThreadNode *node) {
     if (temp->ltag == 1) {
         temp = temp->left;
     } else {
-        ThreadNode *t = GetFirstNode(T);
-        while (t) {
-            if (t->ltag == 0 && t->left == node) {
-                temp = t;
-                break;
+        ThreadNode *par = GetParent(T, node);
+        if (par->right == node && par->ltag == 0) {
+            par = par->left;
+            while (true) {
+                if (par->rtag == 0) {
+                    par = par->right;
+                } else if (par->ltag == 0) {
+                    par = par->left;
+                } else if (par->ltag == 1 || par->rtag == 1) {
+                    temp = par;
+                    break;
+                }
             }
-            GetNextNode(T, t);
+        } else if (par->left == node) {
+            temp = par;
         }
     }
     return temp;
@@ -157,7 +174,7 @@ int main() {
 
     // 先序线索二叉树中先序序列下结点p的前一个结点
     printf("\n-------------\n");
-    ThreadNode *res4 = GetPreNode(T, T->left);
+    ThreadNode *res4 = GetPreNode(T, T->right->left);
     printf("%d\n", res4->data);
 
     // 先序线索二叉树的先序遍历
