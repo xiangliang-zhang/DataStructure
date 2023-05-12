@@ -31,8 +31,8 @@ void SetValue(DLinkList *L, const int num[], int length) {
 }
 
 DLNode *Locate(DLinkList *L, int x) {
-    DLinkList *pPre = L;
-    DLinkList *pNext = L->next;
+    DLinkList *pPre = L;  // 目标元素的前一元素指针
+    DLinkList *pNext = L->next;  // 目标元素的指针
     while (pNext != NULL) {
         if (pNext->data != x) {
             pPre = pPre->next;
@@ -44,12 +44,13 @@ DLNode *Locate(DLinkList *L, int x) {
     pNext->freq++;
     int tFreq = pNext->freq;
     DLinkList *pInsertPre = L;
-    while (pInsertPre->next->freq > tFreq) {
+    while (pInsertPre->next->freq > tFreq) {  //找到要插入元素的位置
         pInsertPre = pInsertPre->next;
     }
-    if (pNext->next) {
+    if (pNext->next) {  // 要移动元素是否是最后结点
         pNext->next->pred = pNext->pred;
     }
+    // 结点插入
     pNext->pred->next = pNext->next;
     pNext->next = pInsertPre->next;
     pInsertPre->next->pred = pNext;
