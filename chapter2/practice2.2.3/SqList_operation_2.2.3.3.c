@@ -35,9 +35,17 @@ bool removeEle(SqList *s, int val){
     return true;
 }
 
+
+void PrintVal(SqList *L){
+    for(int i = 0; i < L->length; i++){
+        printf("%d\t", L->data[i]);
+    }
+}
+
 int main(){
     SqList s;
     InitSqList(&s);
     int val = 3;
     removeEle(&s, val);
+    PrintVal(&s);
 }
