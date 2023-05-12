@@ -69,7 +69,7 @@ int main() {
     printf("%d\n", res2);
     printf("%d\n", res3);
 
-    int *L2 = (int *) malloc(sizeof(int) * InitSize);
+    int *L2 = (int *) malloc(sizeof(int) * MaxSize);
     L2[0] = 2;
     L2[1] = 2;
     SeqList s = {L2, 2, 3};
