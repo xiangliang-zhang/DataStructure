@@ -44,7 +44,7 @@ int getMainEle(SqList s1) {
             num++;
         }
     }
-    if (num > (s1.length / 2)) {
+    if (num >= (s1.length / 2)) {
         return t;
     }
     return -1;
