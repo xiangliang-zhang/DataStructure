@@ -54,11 +54,11 @@ void SetVal(DLinkList *L) {
 bool IsSymmetric(DLinkList *L) {
     DLinkList *p = L->prior;
     DLinkList *n = L->next;
-    while (p != L && n != L) {
+    while (p != n) {
         if (p->data != n->data) {
             return false;
         } else {
-            p = p->next;
+            p = p->prior;
             n = n->next;
         }
     }
