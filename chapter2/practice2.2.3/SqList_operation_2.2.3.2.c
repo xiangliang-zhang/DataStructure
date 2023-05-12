@@ -32,10 +32,17 @@ bool reverseSqList(SqList *s){
     return true;
 }
 
+void PrintVal(SqList *L){
+    for(int i = 0; i < L->length; i++){
+        printf("%d\t", L->data[i]);
+    }
+}
+
 int main() {
     // 初始化
     SqList s;
     InitSqList(&s);
     reverseSqList(&s);
+    PrintVal(&s);
     return 0;
 }
