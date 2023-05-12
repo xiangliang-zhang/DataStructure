@@ -47,64 +47,101 @@ void SetValue(BiTree T) {
 
 #define MaxSize 100
 
-typedef struct Queue {
+typedef struct Stack {
     BiTNode *data[MaxSize];
-    int head, tail;
-} Queue;
+    int tag[MaxSize];
+    int head;
+} Stack;
 
-void InitQueue(Queue *q) {
-    q->head = 0;
-    q->tail = -1;
+void InitStack(Stack *s) {
+    s->head = -1;
 }
 
-void EnQueue(Queue *q, BiTNode *node) {
-    if (q->tail < MaxSize - 1) {
-        q->tail++;
-        q->data[q->tail] = node;
+void Push(Stack *s, BiTNode *node) {
+    if (s->head < MaxSize - 1) {
+        s->head++;
+        s->data[s->head] = node;
     }
 }
 
-BiTNode *DeQueue(Queue *q) {
-    if (q->head <= q->tail) {
-        BiTNode *temp = q->data[q->head];
-        q->head++;
-        return temp;
+BiTNode *Pop(Stack *s) {
+    if (s->head > -1) {
+        BiTNode *res = s->data[s->head];
+        s->head--;
+        return res;
     }
 }
 
-bool EmptyQueue(Queue *q) {
-    if (q->head <= q->tail) {
-        return false;
-    } else {
+bool EmptyStack(Stack *s) {
+    if (s->head == -1) {
         return true;
+    } else {
+        return false;
     }
+}
+
+BiTNode *GetTopStack(Stack *s) {
+    return s->data[s->head];
 }
 
 int GetParent(BiTree T, int num) {
     BiTNode *t = T;
-    Queue *q = (Queue *) malloc(sizeof(Queue));
-    InitQueue(q);
-    EnQueue(q, t);
-    while (t && !EmptyQueue(q)) {
-        t = DeQueue(q);
-        if ((t->left && t->left->data == num) || (t->right && t->right->data == num)) {
-            return t->data;
-        } else {
-            if (t->left) {
-                EnQueue(q, t->left);
+    Stack *s = (Stack *) malloc(sizeof(Stack));
+    InitStack(s);
+
+    while (t != NULL || !EmptyStack(s)) {
+        while (t != NULL && t->data != num) {
+            Push(s, t);
+            s->tag[s->head] = 0;
+            t = t->left;
+        }
+        if (t != NULL && t->data == num) {
+            while (!EmptyStack(s)) {
+                printf("%d\t", Pop(s)->data);
             }
-            if (t->right) {
-                EnQueue(q, t->right);
+            return 0;
+        }
+        while (!EmptyStack(s) && s->tag[s->head] == 1) {
+            Pop(s);
+        }
+        if (!EmptyStack(s)) {
+            s->tag[s->head] = 1;
+            t = s->data[s->head]->right;
+        }
+    }
+}
+
+void GetPath(BiTree T, int x) {
+    Stack *s = (Stack *) malloc(sizeof(Stack));
+    InitStack(s);
+    BiTNode *t = T;
+    BiTNode *pre = NULL;
+    while (t || !EmptyStack(s)) {
+        if (t != NULL && t->data == x) break;
+        if (t != NULL) {
+            Push(s, t);
+            t = t->left;
+        } else {
+            t = GetTopStack(s);
+            if (t->right && t->right != pre) {
+                t = t->right;
+            } else {
+                t = Pop(s);
+                pre = t;
+                t = NULL;
             }
         }
     }
-    return -1;
+    while (!EmptyStack(s)) {
+        printf("%d\t", Pop(s)->data);
+    }
 }
 
 int main() {
     BiTree T = (BiTree) malloc(sizeof(BiTree));
     InitBiTNode(T);
     SetValue(T);
-    int res = GetParent(T, 5);
-    printf("%d\n", res);
+    GetParent(T, 5);
+    printf("\n--------\n");
+    GetPath(T, 5);
 }
