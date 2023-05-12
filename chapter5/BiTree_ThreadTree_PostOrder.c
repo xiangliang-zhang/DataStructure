@@ -2,9 +2,6 @@
 #include "stdlib.h"
 #include "stdbool.h"
 
-// 后序线索二叉树的构造
-
-
 typedef struct ThreadNode {
     int data;
     struct ThreadNode *left;
